@@ -189,11 +189,12 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
+      uses: ncipollo/release-action@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: XiaoMi AX3000T ${{ steps.tag.outputs.release_tag }}
+        tag: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        artifacts: ${{ env.FIRMWARE }}/*

@@ -197,5 +197,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: XiaoMi AX3000T ${{ steps.tag.outputs.release_tag }}
         tag: ${{ steps.tag.outputs.release_tag }}
-        body_path: release.txt
         artifacts: ${{ env.FIRMWARE }}/*

@@ -37,7 +37,7 @@ git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFil
 git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 
 # 科学上网插件
-git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
+# git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 git clone --depth=1 -b lede https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns

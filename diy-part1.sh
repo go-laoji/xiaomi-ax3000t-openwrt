@@ -54,8 +54,8 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/l
 #git_sparse_clone master https://github.com/linkease/nas-packages network/services/ddnsto
 
 # iStore
-# git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
-# git_sparse_clone main https://github.com/linkease/istore luci
+git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
+git_sparse_clone main https://github.com/linkease/istore luci
 
 # 在线用户
 git_sparse_clone main https://github.com/haiibo/packages luci-app-onliner
@@ -67,6 +67,10 @@ chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 date_version=$(date +"%y.%m.%d")
 orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 sed -i "s/${orig_version}/R${date_version} by go-laoji/g" package/lean/default-settings/files/zzz-default-settings
+
+# 移除默认安装的vsftpd、vlmcsd
+sed -i "s/luci-app-vsftpd//g" include/target.mk
+sed -i "s/luci-app-vlmcsd//g" include/target.mk
 
 ./scripts/feeds clean
 ./scripts/feeds update -a

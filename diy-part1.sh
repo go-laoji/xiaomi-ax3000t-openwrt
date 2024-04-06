@@ -47,10 +47,8 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/l
 # Add a feed source
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-git clone https://github.com/xiaorouji/openwrt-passwall.git -b packages ./package/lean/passwall_package
-git clone https://github.com/xiaorouji/openwrt-passwall.git -b luci ./package/lean/passwall
-cp -rf ./package/lean/passwall_package/* ./package/lean/passwall
-rm -rf ./package/lean/passwall_package
+echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git' >>feeds.conf.default
+echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
 #git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-ddnsto
 #git_sparse_clone master https://github.com/linkease/nas-packages network/services/ddnsto

@@ -51,7 +51,7 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/l
 #echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
 sed -i "/helloworld/d" "feeds.conf.default"
-echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+echo "src-git helloworld https://github.com/immortalwrt-collections/helloworld.git" >> "feeds.conf.default"
 
 
 #git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-ddnsto
@@ -76,8 +76,8 @@ sed -i "s/${orig_version}/R${date_version} by go-laoji/g" package/lean/default-s
 sed -i "s/luci-app-vsftpd//g" include/target.mk
 sed -i "s/luci-app-vlmcsd//g" include/target.mk
 
-./scripts/feeds update helloworld
-./scripts/feeds install -a -f -p helloworld
+# ./scripts/feeds update helloworld
+# ./scripts/feeds install -a -f -p helloworld
 
 ./scripts/feeds clean
 ./scripts/feeds update -a

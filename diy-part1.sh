@@ -51,7 +51,7 @@ echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git' >
 echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
 sed -i "/helloworld/d" "feeds.conf.default"
-echo "src-git helloworld https://github.com/immortalwrt-collections/helloworld.git" >> "feeds.conf.default"
+echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
 
 
 #git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-ddnsto

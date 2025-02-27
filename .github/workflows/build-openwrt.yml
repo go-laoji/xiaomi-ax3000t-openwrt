@@ -129,6 +129,17 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: Install ddns-go
+      run: |
+        cd openwrt
+        git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
+
+    - name: Install argon
+      run: |
+        cd openwrt/package/lean
+        rm -rf luci-theme-argon
+        git clone -b master https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files

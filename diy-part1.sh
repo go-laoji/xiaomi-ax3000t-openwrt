@@ -32,17 +32,15 @@ function git_sparse_clone() {
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # 添加额外插件
-# git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
-# git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFilter
-# git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
+git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
+git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 
 # 科学上网插件
 # git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
 git clone --depth=1 -b lede https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
 git clone --depth=1 https://github.com/pymumu/openwrt-smartdns package/smartdns
 
-git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 
 # Add a feed source
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
@@ -51,7 +49,7 @@ echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git' >
 echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
 sed -i "/helloworld/d" "feeds.conf.default"
-# echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
 
 
 #git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-ddnsto

@@ -1,11 +1,15 @@
 # 适用于小米ax3000t的openwrt固件
 
-# 归档声明
-经测试最新版本在刷入时会不成功，无论是系统内升级，还是在uboot中刷入，均无法正常启动
 
-目前我的两台机器 一个刷入的是 [0820](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/releases/tag/2024.08.20-0842) 一个是 [0716](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/releases/tag/2024.07.16-0841)
-结合[issues](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/issues/3)反馈，本项目归档不再自动构建！！！
+## 开启更新
 
+  经测试[2025.02。28](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/releases/tag/2025.02.28-1322)可以在uboot中刷入成功，但可能会不能自动重启，手动重启也可完成升级，还未在web中进行升级测试
+
+### 注意事项
+ * Sing-Box 不可在web中点击升级，因空间不足会失败，除非把路径切换到`/tmp`下
+ * 默认主机名为`LEDE`,后续确定好是修改哪个文件后会修改
+ * `argon`主题切换为最新版本
+ * 刷入后的系统默认地址是`192.168.11.1` 帐号`root` 密码`password`
 
 ## 修改说明
 

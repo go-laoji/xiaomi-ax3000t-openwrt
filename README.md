@@ -3,7 +3,7 @@
 
 ## 开启更新
 
-  经测试[2025.02。28](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/releases/tag/2025.02.28-1322)可以在uboot中刷入成功，但可能会不能自动重启，手动重启也可完成升级，还未在web中进行升级测试
+  经测试[2025.02.28](https://github.com/go-laoji/xiaomi-ax3000t-openwrt/releases/tag/2025.02.28-1322)可以在uboot中刷入成功，但可能会不能自动重启，手动重启也可完成升级，还未在web中进行升级测试
 
 ### 注意事项
  * Sing-Box 不可在web中点击升级，因空间不足会失败，除非把路径切换到`/tmp`下

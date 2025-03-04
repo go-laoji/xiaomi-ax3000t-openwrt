@@ -155,7 +155,7 @@
 
 ### 6.通过MobaXterm连接路由器的ssh,ip:`192.168.31.1`
 
-## 三,刷入uboot [uboot固件下载](https://wwk.lanzouo.com/iL71O1nk1p3e)
+## 三,刷入uboot [uboot固件下载](https://wwk.lanzouo.com/isDQD24feyxi)
 
 ### 1.用MobaXterm将uboot文件上传到路由器的`/tmp`文件夹
 

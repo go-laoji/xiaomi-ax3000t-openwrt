@@ -121,7 +121,21 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-        
+    
+    - name: Prepare custom feeds
+      run: |
+        cd openwrt
+        sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+        ./scripts/feeds update -a
+        rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-mosdns}
+        rm -rf feeds/packages/net/{alist,adguardhome,dae,daed,mosdns,xray*,v2ray*,sing*,smartdns} feeds/packages/utils/v2dat feeds/packages/lang/golang
+        rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
+        git clone https://github.com/kenzok8/golang -b 1.26 feeds/packages/lang/golang
+        git clone --depth=1 --filter=blob:none --sparse https://github.com/kenzok8/openwrt-daede package/community/openwrt-daede
+        git -C package/community/openwrt-daede sparse-checkout set daed luci-app-daede vmlinux-btf
+        test -f package/community/openwrt-daede/daed/Makefile
+        test -f package/community/openwrt-daede/luci-app-daede/Makefile
+        ./scripts/feeds update -i packages luci smpackage
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a

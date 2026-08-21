@@ -47,11 +47,11 @@ git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-a
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 # echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git' >>feeds.conf.default
 # echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
-echo 'src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' >>feeds.conf.default
-echo 'src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' >>feeds.conf.default
+# echo 'src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' >>feeds.conf.default
+# echo 'src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' >>feeds.conf.default
 
 sed -i "/helloworld/d" "feeds.conf.default"
-echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+# echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
 
 
 #git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-ddnsto

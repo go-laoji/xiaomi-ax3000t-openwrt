@@ -133,6 +133,8 @@ jobs:
         cd openwrt
         sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
         ./scripts/feeds update -a
+        sed -i 's/^PKG_BUILD_PARALLEL:=1$/PKG_BUILD_PARALLEL:=0/' feeds/smpackage/tcping/Makefile
+        grep -q '^PKG_BUILD_PARALLEL:=0$' feeds/smpackage/tcping/Makefile
         rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-mosdns}
         rm -rf feeds/packages/net/{alist,adguardhome,dae,daed,mosdns,xray*,v2ray*,sing*,smartdns} feeds/packages/utils/v2dat feeds/packages/lang/golang
         rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
@@ -176,11 +178,6 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
-    - name: Compile tcping serially
-      run: |
-        cd openwrt
-        make -j1 V=s package/feeds/smpackage/tcping/compile
 
     - name: Compile the firmware
       id: compile

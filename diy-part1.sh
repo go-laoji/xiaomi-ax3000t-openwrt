@@ -61,7 +61,6 @@ sed -i "/helloworld/d" "feeds.conf.default"
 # git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
 # git_sparse_clone main https://github.com/linkease/istore luci
 
-git pull
 
 # 修改版本为编译日期
 date_version=$(date +"%y.%m.%d")

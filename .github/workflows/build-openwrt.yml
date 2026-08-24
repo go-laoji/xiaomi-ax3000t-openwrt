@@ -147,7 +147,15 @@ jobs:
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: |
+        cd openwrt
+        # zerotier now ships /etc/init.d/zerotier itself. Older LuCI packages
+        # bundle the same file and make package/install fail with a file clash.
+        rm -f \
+          feeds/luci/applications/luci-app-zerotier/root/etc/init.d/zerotier \
+          feeds/small/luci-app-zerotier/root/etc/init.d/zerotier \
+          feeds/smpackage/luci-app-zerotier/root/etc/init.d/zerotier
+        ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |

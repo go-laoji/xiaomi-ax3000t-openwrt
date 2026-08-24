@@ -115,7 +115,7 @@ jobs:
       if: env.CACHE_TOOLCHAIN == 'true'
       uses: HiGarfield/cachewrtbuild@main
       with:
-        ccache: false
+        ccache: true
         # Host tools in staging_dir are linked against the runner's glibc, so
         # caches must not be shared across Ubuntu releases.
         mixkey: ${{ env.SOURCE_REPO }}-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}-ubuntu-24.04
@@ -143,9 +143,6 @@ jobs:
         test -f package/community/openwrt-daede/luci-app-daede/Makefile
         ./scripts/feeds update -i packages luci smpackage
 
-    - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
-
     - name: Install feeds
       run: |
         cd openwrt
@@ -153,7 +150,6 @@ jobs:
         # bundle the same file and make package/install fail with a file clash.
         rm -f \
           feeds/luci/applications/luci-app-zerotier/root/etc/init.d/zerotier \
-          feeds/small/luci-app-zerotier/root/etc/init.d/zerotier \
           feeds/smpackage/luci-app-zerotier/root/etc/init.d/zerotier
         ./scripts/feeds install -a
 
@@ -186,7 +182,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 || make -j1 V=s
+        make -j"$(nproc)" || make -j"$(nproc)" V=s
         echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV

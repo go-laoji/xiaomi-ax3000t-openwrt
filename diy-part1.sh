@@ -61,9 +61,7 @@ sed -i "/helloworld/d" "feeds.conf.default"
 # git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
 # git_sparse_clone main https://github.com/linkease/istore luci
 
-sed -i '1i src-git small https://github.com/kenzok8/small' feeds.conf.default
 git pull
-rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
 
 # 修改版本为编译日期
 date_version=$(date +"%y.%m.%d")

@@ -177,6 +177,11 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+    - name: Compile tcping serially
+      run: |
+        cd openwrt
+        make -j1 V=s package/feeds/smpackage/tcping/compile
+
     - name: Compile the firmware
       id: compile
       run: |

@@ -137,7 +137,7 @@ jobs:
         grep -q '^PKG_BUILD_PARALLEL:=0$' feeds/smpackage/tcping/Makefile
         rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-mosdns}
         rm -rf feeds/packages/net/{alist,adguardhome,dae,daed,mosdns,xray*,v2ray*,sing*,smartdns} feeds/packages/utils/v2dat feeds/packages/lang/golang
-        rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
+        rm -rf feeds/smpackage/{base-files,ddns-go,dnsmasq,firewall*,fullconenat,libnftnl,luci-app-ddns-go,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
         git clone https://github.com/kenzok8/golang -b 1.26 feeds/packages/lang/golang
         git clone --depth=1 --filter=blob:none --sparse https://github.com/kenzok8/openwrt-daede package/community/openwrt-daede
         git -C package/community/openwrt-daede sparse-checkout set daed luci-app-daede vmlinux-btf
@@ -154,6 +154,11 @@ jobs:
           feeds/luci/applications/luci-app-zerotier/root/etc/init.d/zerotier \
           feeds/smpackage/luci-app-zerotier/root/etc/init.d/zerotier
         ./scripts/feeds install -a
+
+    - name: Install ddns-go
+      run: |
+        cd openwrt
+        git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 
     - name: Load custom configuration
       run: |

@@ -67,9 +67,17 @@ date_version=$(date +"%y.%m.%d")
 orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 sed -i "s/${orig_version}/R${date_version} by go-laoji/g" package/lean/default-settings/files/zzz-default-settings
 
-# 移除默认安装的vsftpd、vlmcsd
-sed -i "s/luci-app-vsftpd//g" include/target.mk
-sed -i "s/luci-app-vlmcsd//g" include/target.mk
+# 移除不需要的默认软件。仅修改 .config 不足以排除这些包，因为
+# Lean 源码会从 include/target.mk 的 DEFAULT_PACKAGES 再次选中它们。
+for package in \
+  luci-app-vsftpd \
+  luci-app-vlmcsd \
+  luci-app-ssr-plus \
+  luci-app-ddns \
+  ddns-scripts_aliyun \
+  ddns-scripts_dnspod; do
+  sed -i -E "s/(^|[[:space:]])${package}([[:space:]]|$)/\\1\\2/g" include/target.mk
+done
 
 # ./scripts/feeds update helloworld
 # ./scripts/feeds install -a -f -p helloworld

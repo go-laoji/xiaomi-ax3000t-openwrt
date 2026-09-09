@@ -69,6 +69,8 @@ for package in \
   luci-app-vlmcsd \
   luci-app-ssr-plus \
   luci-app-ddns \
+  luci-app-filetransfer \
+  luci-app-nlbwmon \
   ddns-scripts_aliyun \
   ddns-scripts_dnspod; do
   sed -i -E "s/(^|[[:space:]])${package}([[:space:]]|$)/\\1\\2/g" include/target.mk

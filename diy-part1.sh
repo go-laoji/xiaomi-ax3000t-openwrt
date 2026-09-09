@@ -44,11 +44,6 @@ git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-a
 
 # Add a feed source
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-# echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git' >>feeds.conf.default
-# echo 'src-git passwall_package https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
-# echo 'src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' >>feeds.conf.default
-# echo 'src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' >>feeds.conf.default
 
 sed -i "/helloworld/d" "feeds.conf.default"
 # echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
@@ -61,24 +56,27 @@ sed -i "/helloworld/d" "feeds.conf.default"
 # git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
 # git_sparse_clone main https://github.com/linkease/istore luci
 
-# 在线用户
-git_sparse_clone main https://github.com/haiibo/packages luci-app-onliner
-sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=2s' package/lean/default-settings/files/zzz-default-settings
-sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
-chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # 修改版本为编译日期
 date_version=$(date +"%y.%m.%d")
 orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 sed -i "s/${orig_version}/R${date_version} by go-laoji/g" package/lean/default-settings/files/zzz-default-settings
 
-# 移除默认安装的vsftpd、vlmcsd
-sed -i "s/luci-app-vsftpd//g" include/target.mk
-sed -i "s/luci-app-vlmcsd//g" include/target.mk
+# 移除不需要的默认软件。仅修改 .config 不足以排除这些包，因为
+# Lean 源码会从 include/target.mk 的 DEFAULT_PACKAGES 再次选中它们。
+for package in \
+  luci-app-vsftpd \
+  luci-app-vlmcsd \
+  luci-app-ssr-plus \
+  luci-app-ddns \
+  luci-app-filetransfer \
+  luci-app-nlbwmon \
+  ddns-scripts_aliyun \
+  ddns-scripts_dnspod; do
+  sed -i -E "s/(^|[[:space:]])${package}([[:space:]]|$)/\\1\\2/g" include/target.mk
+done
 
 # ./scripts/feeds update helloworld
 # ./scripts/feeds install -a -f -p helloworld
 
 ./scripts/feeds clean
-./scripts/feeds update -a
-./scripts/feeds install -a
